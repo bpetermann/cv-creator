@@ -90,7 +90,7 @@ class GeneralInformation extends Component {
             onChange={this.handleName}
             value={cv.name}
             type='text'
-            placeholder='First Name/Last name'
+            placeholder='First Name/Last Name'
             required
           />
           <input
