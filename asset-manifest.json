@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/cv-creator/static/css/main.f0f5a1fd.css",
+    "main.js": "/cv-creator/static/js/main.953f4de1.js",
+    "index.html": "/cv-creator/index.html",
+    "main.f0f5a1fd.css.map": "/cv-creator/static/css/main.f0f5a1fd.css.map",
+    "main.953f4de1.js.map": "/cv-creator/static/js/main.953f4de1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f0f5a1fd.css",
+    "static/js/main.953f4de1.js"
+  ]
+}
