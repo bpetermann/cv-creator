@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CurriculumOutput from './output/CurriculumOutput';
+import CVOutput from './output/CVOutput';
 import EducationalExperience from './components/EducationalExperience';
 import GeneralInformation from './components/GeneralInformation';
 import PracticalExperience from './components/PracticalExperience';
@@ -10,12 +10,7 @@ class App extends Component {
     super();
 
     this.state = {
-      generalInfo: {
-        name: '',
-        city: '',
-        phone: '',
-        mail: '',
-      },
+      generalInfo: {},
       experience: [],
       educationalInfo: [],
     };
@@ -82,7 +77,7 @@ class App extends Component {
             />
           </div>
         </div>
-        <CurriculumOutput
+        <CVOutput
           info={generalInfo}
           education={educationalInfo}
           experience={experience}

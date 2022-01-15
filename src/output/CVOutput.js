@@ -4,7 +4,7 @@ import GeneralInfoOutput from './GeneralInfoOutput.js';
 import EducationExpOutput from './EducationExpOutput.js';
 import PracticalExpOutput from './PracticalExpOutput';
 
-const CurriculumOutput = (props) => {
+const CVOutput = (props) => {
   const { info, education, experience } = props;
   return (
     <div className='container'>
@@ -15,4 +15,4 @@ const CurriculumOutput = (props) => {
   );
 };
 
-export default CurriculumOutput;
+export default CVOutput;
