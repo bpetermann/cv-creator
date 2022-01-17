@@ -1,24 +1,23 @@
 body {
-    color: #fbfbfd;
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    font-weight: 800;
-     background: rgb(32, 30, 47);
-     background: linear-gradient(
-        50deg,
-        rgba(32, 30, 47, 1) 16%,
-        rgba(58, 97, 120, 1) 29%,
-        rgba(58, 97, 120, 1) 36%,
-        rgba(47, 62, 84, 1) 47%,
-        rgba(32, 30, 47, 1) 75%
-      )
-      fixed;
-  }
+  color: #fbfbfd;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  background: rgb(32, 30, 47);
+  background: linear-gradient(
+      50deg,
+      rgba(32, 30, 47, 1) 16%,
+      rgba(58, 97, 120, 1) 29%,
+      rgba(58, 97, 120, 1) 36%,
+      rgba(47, 62, 84, 1) 47%,
+      rgba(32, 30, 47, 1) 75%
+    )
+    fixed;
+}
 
+h1 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 4em;
+  margin-left: 0.5em;
+}
 
-  h1 {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 4em;
-    margin-left: 0.6em;
-  }
-  

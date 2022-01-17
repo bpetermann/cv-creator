@@ -5,12 +5,11 @@ import EducationExpOutput from './EducationExpOutput.js';
 import PracticalExpOutput from './PracticalExpOutput';
 
 const CVOutput = (props) => {
-  const { info, education, experience } = props;
   return (
     <div className='container'>
-      <GeneralInfoOutput info={info} />
-      <EducationExpOutput education={education} />
-      <PracticalExpOutput experience={experience} />
+      <GeneralInfoOutput info={props.info} />
+      <EducationExpOutput education={props.education} />
+      <PracticalExpOutput experience={props.experience} />
     </div>
   );
 };

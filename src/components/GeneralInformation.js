@@ -1,129 +1,97 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import '../styles/Forms.css';
 
-class GeneralInformation extends Component {
-  constructor() {
-    super();
+const GeneralInformation = (props) => {
+  const [enteredName, setEnteredName] = useState('');
+  const [enteredCity, setEnteredCity] = useState('');
+  const [enteredPhone, setEnteredPhone] = useState('');
+  const [enteredMail, setEnteredMail] = useState('');
 
-    this.state = {
-      cv: {
-        name: '',
-        city: '',
-        phone: '',
-        mail: '',
-      },
+  const nameChangeHandler = (event) => {
+    setEnteredName(event.target.value);
+  };
+
+  const cityChangeHandler = (event) => {
+    setEnteredCity(event.target.value);
+  };
+
+  const phoneChangeHandler = (event) => {
+    setEnteredPhone(event.target.value);
+  };
+
+  const mailChangeHandler = (event) => {
+    setEnteredMail(event.target.value);
+  };
+
+  const onSubmitGeneralInfo = (event) => {
+    event.preventDefault();
+
+    const generalInfo = {
+      name: enteredName,
+      city: enteredCity,
+      phone: enteredPhone,
+      mail: enteredMail,
     };
-  }
 
-  handleName = (e) => {
-    this.setState({
-      cv: {
-        ...this.state.cv,
-        name: e.target.value,
-      },
-    });
+    props.onFormSubmit(generalInfo, 'generalInfo');
+    setEnteredName('');
+    setEnteredCity('');
+    setEnteredPhone('');
+    setEnteredMail('');
   };
 
-  handleCity = (e) => {
-    this.setState({
-      cv: {
-        ...this.state.cv,
-        city: e.target.value,
-      },
-    });
-  };
-  handlePhone = (e) => {
-    this.setState({
-      cv: {
-        ...this.state.cv,
-        phone: e.target.value,
-      },
-    });
-  };
-  handleMail = (e) => {
-    this.setState({
-      cv: {
-        ...this.state.cv,
-        mail: e.target.value,
-      },
-    });
+  const onResetHandler = (event) => {
+    event.preventDefault();
+    setEnteredName('');
+    setEnteredCity('');
+    setEnteredPhone('');
+    setEnteredMail('');
   };
 
-  onSubmitCV = (e) => {
-    e.preventDefault();
-    this.setState({
-      cv: {
-        name: '',
-        birth: '',
-        city: '',
-        phone: '',
-        mail: '',
-      },
-    });
-    this.props.onFormSubmit(this.state.cv);
-  };
-
-  onResetHandler = (e) => {
-    e.preventDefault();
-    this.setState({
-      cv: {
-        name: '',
-        birth: '',
-        city: '',
-        phone: '',
-        mail: '',
-      },
-    });
-  };
-
-  render() {
-    const { cv } = this.state;
-
-    return (
-      <div>
-        <form
-          onSubmit={this.onSubmitCV}
-          onReset={this.onResetHandler}
-          className='form'
-        >
-          <input
-            onChange={this.handleName}
-            value={cv.name}
-            type='text'
-            placeholder='First Name/Last Name'
-            required
-          />
-          <input
-            onChange={this.handleCity}
-            value={cv.city}
-            placeholder='Your Location'
-            type='text'
-            required
-          />
-          <input
-            onChange={this.handlePhone}
-            value={cv.phone}
-            placeholder='Your Phone'
-            type='number'
-            required
-          />
-          <input
-            onChange={this.handleMail}
-            value={cv.mail}
-            placeholder='Your Email'
-            type='text'
-            required
-          />
-          <button className='delete' type='reset'>
-            Delete
-          </button>
-          <button className='add' type='submit'>
-            Add
-          </button>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form
+        onSubmit={onSubmitGeneralInfo}
+        onReset={onResetHandler}
+        className='form'
+      >
+        <input
+          onChange={nameChangeHandler}
+          value={enteredName}
+          type='text'
+          placeholder='First Name/Last Name'
+          required
+        />
+        <input
+          onChange={cityChangeHandler}
+          value={enteredCity}
+          placeholder='Your Location'
+          type='text'
+          required
+        />
+        <input
+          onChange={phoneChangeHandler}
+          value={enteredPhone}
+          placeholder='Your Phone'
+          type='number'
+          required
+        />
+        <input
+          onChange={mailChangeHandler}
+          value={enteredMail}
+          placeholder='Your Email'
+          type='text'
+          required
+        />
+        <button className='delete' type='reset'>
+          Delete
+        </button>
+        <button className='add' type='submit'>
+          Add
+        </button>
+      </form>
+    </div>
+  );
+};
 
 export default GeneralInformation;

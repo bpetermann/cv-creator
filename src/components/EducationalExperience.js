@@ -1,124 +1,96 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import uniqid from 'uniqid';
 import '../styles/Forms.css';
 
-class EducationalExperience extends Component {
-  constructor() {
-    super();
+const EducationalExperience = (props) => {
+  const [enteredFromDate, setenteredFromDate] = useState('');
+  const [enteredToDate, setenteredToDate] = useState('');
+  const [enteredShool, setenteredShool] = useState('');
+  const [enteredDegree, setenteredDegree] = useState('');
 
-    this.state = {
-      education: {
-        from: '',
-        to: '',
-        shool: '',
-        degree: '',
-        id: uniqid(),
-      },
+  const fromDateChangeHandler = (event) => {
+    setenteredFromDate(event.target.value);
+  };
+
+  const toDateChangeHandler = (event) => {
+    setenteredToDate(event.target.value);
+  };
+
+  const shoolChangeHandler = (event) => {
+    setenteredShool(event.target.value);
+  };
+
+  const degreeChangeHanlder = (event) => {
+    setenteredDegree(event.target.value);
+  };
+
+  const submitEducationHandler = (event) => {
+    event.preventDefault();
+
+    const education = {
+      from: enteredFromDate,
+      to: enteredToDate,
+      shool: enteredShool,
+      degree: enteredDegree,
+      id: uniqid(),
     };
-  }
 
-  handleFrom = (e) => {
-    this.setState({
-      education: {
-        ...this.state.education,
-        from: e.target.value,
-      },
-    });
-  };
-  handleTo = (e) => {
-    this.setState({
-      education: {
-        ...this.state.education,
-        to: e.target.value,
-      },
-    });
+    props.onFormSubmit(education, 'education');
+    setenteredFromDate('');
+    setenteredToDate('');
+    setenteredShool('');
+    setenteredDegree('');
   };
 
-  handleShool = (e) => {
-    this.setState({
-      education: {
-        ...this.state.education,
-        shool: e.target.value,
-      },
-    });
+  const resetHandler = (event) => {
+    event.preventDefault();
+    props.onDeleteSubmit();
   };
 
-  handleDegree = (e) => {
-    this.setState({
-      education: {
-        ...this.state.education,
-        degree: e.target.value,
-      },
-    });
-  };
-
-  onSubmitEducation = (e) => {
-    e.preventDefault();
-    this.props.onFormSubmit(this.state.education);
-    this.setState({
-      education: {
-        from: '',
-        to: '',
-        shool: '',
-        degree: '',
-        id: uniqid(),
-      },
-    });
-  };
-
-  onResetHandler = (e) => {
-    e.preventDefault();
-    this.props.onDeleteSubmit();
-  };
-
-  render() {
-    const { education } = this.state;
-
-    return (
-      <div>
-        <form
-          onSubmit={this.onSubmitEducation}
-          onReset={this.onResetHandler}
-          className='form'
-        >
-          <input
-            onChange={this.handleFrom}
-            value={education.from}
-            placeholder='From'
-            type='text'
-            required
-          />
-          <input
-            onChange={this.handleTo}
-            value={education.to}
-            placeholder='To'
-            type='text'
-            required
-          />
-          <input
-            onChange={this.handleShool}
-            value={education.shool}
-            placeholder='University/School Name'
-            type='text'
-            required
-          />
-          <input
-            onChange={this.handleDegree}
-            value={education.degree}
-            placeholder='Degree'
-            type='text'
-            required
-          />
-          <button className='delete' type='reset'>
-            Delete
-          </button>
-          <button className='add' type='submit'>
-            Add
-          </button>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form
+        onSubmit={submitEducationHandler}
+        onReset={resetHandler}
+        className='form'
+      >
+        <input
+          onChange={fromDateChangeHandler}
+          value={enteredFromDate}
+          placeholder='From'
+          type='text'
+          required
+        />
+        <input
+          onChange={toDateChangeHandler}
+          value={enteredToDate}
+          placeholder='To'
+          type='text'
+          required
+        />
+        <input
+          onChange={shoolChangeHandler}
+          value={enteredShool}
+          placeholder='University/School Name'
+          type='text'
+          required
+        />
+        <input
+          onChange={degreeChangeHanlder}
+          value={enteredDegree}
+          placeholder='Degree'
+          type='text'
+          required
+        />
+        <button className='delete' type='reset'>
+          Delete
+        </button>
+        <button className='add' type='submit'>
+          Add
+        </button>
+      </form>
+    </div>
+  );
+};
 
 export default EducationalExperience;

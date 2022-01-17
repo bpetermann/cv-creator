@@ -1,125 +1,96 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import uniqid from 'uniqid';
 import '../styles/Forms.css';
 
-class PracticalExperience extends Component {
-  constructor() {
-    super();
+const PracticalExperience = (props) => {
+  const [enteredFromDate, setEnteredFromDate] = useState('');
+  const [enteredToDate, setEnteredToDate] = useState('');
+  const [enteredCompany, setEnteredCompany] = useState('');
+  const [enteredDescription, setEnteredDescription] = useState('');
 
-    this.state = {
-      experience: {
-        from: '',
-        to: '',
-        company: '',
-        description: '',
-        id: uniqid(),
-      },
+  const fromDateChangeHandler = (event) => {
+    setEnteredFromDate(event.target.value);
+  };
+
+  const toDateChangeHandler = (event) => {
+    setEnteredToDate(event.target.value);
+  };
+
+  const companyChangeHandler = (event) => {
+    setEnteredCompany(event.target.value);
+  };
+
+  const descriptionChangeHandler = (event) => {
+    setEnteredDescription(event.target.value);
+  };
+
+  const onSubmitExperienceHandler = (event) => {
+    event.preventDefault();
+
+    const experience = {
+      from: enteredFromDate,
+      to: enteredToDate,
+      company: enteredCompany,
+      description: enteredDescription,
+      id: uniqid(),
     };
-  }
 
-  handleFrom = (e) => {
-    this.setState({
-      experience: {
-        ...this.state.experience,
-        from: e.target.value,
-      },
-    });
+    props.onFormSubmit(experience, 'experience');
+    setEnteredFromDate('');
+    setEnteredToDate('');
+    setEnteredCompany('');
+    setEnteredDescription('');
   };
 
-  handleTo = (e) => {
-    this.setState({
-      experience: {
-        ...this.state.experience,
-        to: e.target.value,
-      },
-    });
+  const onResetHandler = (event) => {
+    event.preventDefault();
+    props.onDeleteSubmit();
   };
 
-  handleCompany = (e) => {
-    this.setState({
-      experience: {
-        ...this.state.experience,
-        company: e.target.value,
-      },
-    });
-  };
-
-  handleDescription = (e) => {
-    this.setState({
-      experience: {
-        ...this.state.experience,
-        description: e.target.value,
-      },
-    });
-  };
-
-  onSubmitExperience = (e) => {
-    e.preventDefault();
-    this.props.onFormSubmit(this.state.experience);
-    this.setState({
-      experience: {
-        from: '',
-        to: '',
-        company: '',
-        description: '',
-        id: uniqid(),
-      },
-    });
-  };
-
-  onResetHandler = (e) => {
-    e.preventDefault();
-    this.props.onDeleteSubmit();
-  };
-
-  render() {
-    const { experience } = this.state;
-
-    return (
-      <div>
-        <form
-          onSubmit={this.onSubmitExperience}
-          onReset={this.onResetHandler}
-          className='form'
-        >
-          <input
-            onChange={this.handleFrom}
-            value={experience.from}
-            placeholder='From'
-            type='text'
-            required
-          />
-          <input
-            onChange={this.handleTo}
-            value={experience.to}
-            placeholder='To'
-            type='text'
-            required
-          />
-          <input
-            onChange={this.handleCompany}
-            value={experience.company}
-            placeholder='Company'
-            type='text'
-            required
-          />
-          <input
-            onChange={this.handleDescription}
-            value={experience.description}
-            placeholder='Description'
-            type='text'
-            required
-          />
-          <button className='delete' type='reset'>
-            Delete
-          </button>
-          <button className='add' type='submit'>
-            Add
-          </button>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form
+        onSubmit={onSubmitExperienceHandler}
+        onReset={onResetHandler}
+        className='form'
+      >
+        <input
+          onChange={fromDateChangeHandler}
+          value={enteredFromDate}
+          placeholder='From'
+          type='text'
+          required
+        />
+        <input
+          onChange={toDateChangeHandler}
+          value={enteredToDate}
+          placeholder='To'
+          type='text'
+          required
+        />
+        <input
+          onChange={companyChangeHandler}
+          value={enteredCompany}
+          placeholder='Company'
+          type='text'
+          required
+        />
+        <input
+          onChange={descriptionChangeHandler}
+          value={enteredDescription}
+          placeholder='Description'
+          type='text'
+          required
+        />
+        <button className='delete' type='reset'>
+          Delete
+        </button>
+        <button className='add' type='submit'>
+          Add
+        </button>
+      </form>
+    </div>
+  );
+};
 
 export default PracticalExperience;
