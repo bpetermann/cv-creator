@@ -42,10 +42,7 @@ const GeneralInformation = (props) => {
 
   const onResetHandler = (event) => {
     event.preventDefault();
-    setEnteredName('');
-    setEnteredCity('');
-    setEnteredPhone('');
-    setEnteredMail('');
+    props.onDeleteSubmit();
   };
 
   return (

@@ -7,9 +7,13 @@ import PracticalExpOutput from './PracticalExpOutput';
 const CVOutput = (props) => {
   return (
     <div className='container'>
-      <GeneralInfoOutput info={props.info} />
-      <EducationExpOutput education={props.education} />
-      <PracticalExpOutput experience={props.experience} />
+      {props.info.length > 0 && <GeneralInfoOutput info={props.info} />}
+      {props.education.length > 0 && (
+        <EducationExpOutput education={props.education} />
+      )}
+      {props.experience.length > 0 && (
+        <PracticalExpOutput experience={props.experience} />
+      )}
     </div>
   );
 };

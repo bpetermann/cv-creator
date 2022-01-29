@@ -6,13 +6,13 @@ import PracticalExperience from './components/PracticalExperience';
 import './styles/Body.css';
 
 const App = () => {
-  const [generalInfo, setGeneralInfo] = useState({});
+  const [generalInfo, setGeneralInfo] = useState([]);
   const [experience, setExperience] = useState([]);
   const [education, setEducation] = useState([]);
 
   const cvInfoHandler = (info, fromForm) => {
     if (fromForm === 'generalInfo') {
-      setGeneralInfo({ ...info });
+      setGeneralInfo([info]);
     } else if (fromForm === 'experience') {
       setExperience((prevExperience) => {
         return [...prevExperience, info];
@@ -36,13 +36,20 @@ const App = () => {
     });
   };
 
+  const removeGeneralInfoHandler = () => {
+    setGeneralInfo([]);
+  };
+
   return (
     <div>
       <h1>CV Creator</h1>
       <div className='form-container'>
         <div className='form-div'>
           <h2>General Information</h2>
-          <GeneralInformation onFormSubmit={cvInfoHandler} />
+          <GeneralInformation
+            onFormSubmit={cvInfoHandler}
+            onDeleteSubmit={removeGeneralInfoHandler}
+          />
         </div>
         <div className='form-div'>
           <h2>Educational Experience</h2>
