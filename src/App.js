@@ -4,11 +4,13 @@ import EducationalExperience from './components/EducationalExperience';
 import GeneralInformation from './components/GeneralInformation';
 import PracticalExperience from './components/PracticalExperience';
 import './styles/Body.css';
+import ToggleFormButton from './components/ToggleFormButton';
 
 const App = () => {
   const [generalInfo, setGeneralInfo] = useState([]);
   const [experience, setExperience] = useState([]);
   const [education, setEducation] = useState([]);
+  const [showForms, setShowForms] = useState(true);
 
   const cvInfoHandler = (info, fromForm) => {
     if (fromForm === 'generalInfo') {
@@ -40,38 +42,45 @@ const App = () => {
     setGeneralInfo([]);
   };
 
+  const toggleFormHandler = () => {
+    setShowForms((prevShowForm) => !prevShowForm);
+  };
+
   return (
-    <div>
+    <React.Fragment>
       <h1>CV Creator</h1>
-      <div className='form-container'>
-        <div className='form-div'>
-          <h2>General Information</h2>
-          <GeneralInformation
-            onFormSubmit={cvInfoHandler}
-            onDeleteSubmit={removeGeneralInfoHandler}
-          />
+      <ToggleFormButton onToggleForm={toggleFormHandler} />
+      {showForms && (
+        <div className='form-container'>
+          <div className='form-div'>
+            <h2>General Information</h2>
+            <GeneralInformation
+              onFormSubmit={cvInfoHandler}
+              onDeleteSubmit={removeGeneralInfoHandler}
+            />
+          </div>
+          <div className='form-div'>
+            <h2>Educational Experience</h2>
+            <EducationalExperience
+              onFormSubmit={cvInfoHandler}
+              onDeleteSubmit={removeEducationHandler}
+            />
+          </div>
+          <div className='form-div'>
+            <h2>Practical Experience</h2>
+            <PracticalExperience
+              onFormSubmit={cvInfoHandler}
+              onDeleteSubmit={removeExperienceHandler}
+            />
+          </div>
         </div>
-        <div className='form-div'>
-          <h2>Educational Experience</h2>
-          <EducationalExperience
-            onFormSubmit={cvInfoHandler}
-            onDeleteSubmit={removeEducationHandler}
-          />
-        </div>
-        <div className='form-div'>
-          <h2>Practical Experience</h2>
-          <PracticalExperience
-            onFormSubmit={cvInfoHandler}
-            onDeleteSubmit={removeExperienceHandler}
-          />
-        </div>
-      </div>
+      )}
       <CVOutput
         info={generalInfo}
         education={education}
         experience={experience}
       />
-    </div>
+    </React.Fragment>
   );
 };
 

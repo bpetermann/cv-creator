@@ -1,5 +1,5 @@
 .container {
-  margin-top: 6em;
+  margin-top: 2em;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 }
